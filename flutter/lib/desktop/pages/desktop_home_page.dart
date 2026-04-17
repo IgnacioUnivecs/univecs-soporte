@@ -235,18 +235,27 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                       translate("ID"),
                       style: TextStyle(fontSize: 13, color: Colors.black54),
                     ),
-                    GestureDetector(
-                      onDoubleTap: () {
-                        Clipboard.setData(
-                            ClipboardData(text: model.serverId.text));
-                        showToast(translate("Copied"));
-                      },
-                      child: Text(
-                        model.serverId.text,
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF00ADD8),
+                    SizedBox(
+                      height: 44,
+                      child: GestureDetector(
+                        onDoubleTap: () {
+                          Clipboard.setData(
+                              ClipboardData(text: model.serverId.text));
+                          showToast(translate("Copied"));
+                        },
+                        child: TextFormField(
+                          controller: model.serverId,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF00ADD8),
+                          ),
                         ),
                       ),
                     ),
@@ -261,13 +270,21 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                       translate("Password"),
                       style: TextStyle(fontSize: 13, color: Colors.black54),
                     ),
-                    SizedBox(height: 4),
-                    Text(
-                      model.serverPasswd.text,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
+                    SizedBox(
+                      height: 32,
+                      child: TextFormField(
+                        controller: model.serverPasswd,
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
                       ),
                     ),
                   ],
