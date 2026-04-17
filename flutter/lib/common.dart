@@ -3690,7 +3690,7 @@ Widget loadLogo() {
             },
           );
           return Container(
-            constraints: BoxConstraints(maxWidth: 300, maxHeight: 120),
+            constraints: BoxConstraints(maxWidth: 300, maxHeight: 90),
             child: image,
           ).marginOnly(left: 12, right: 12, top: 12);
         }
