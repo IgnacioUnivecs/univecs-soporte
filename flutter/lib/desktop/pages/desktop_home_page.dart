@@ -91,8 +91,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         child: loadLogo(),
       ),
       buildTip(context),
-      if (!isOutgoingOnly) buildIDBoard(context),
-      if (!isOutgoingOnly) buildPasswordBoard(context),
+      // Moved to right pane in buildRightPane: buildIDBoard, buildPasswordBoard
       FutureBuilder<Widget>(
         future: Future.value(
             Obx(() => buildHelpCards(stateGlobal.updateUrl.value))),
@@ -181,9 +180,99 @@ class _DesktopHomePageState extends State<DesktopHomePage>
   }
 
   buildRightPane(BuildContext context) {
+    final isOutgoingOnly = bind.isOutgoingOnly();
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: ConnectionPage(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (!isOutgoingOnly) buildLocalIdCard(context),
+          Expanded(child: ConnectionPage()),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLocalIdCard(BuildContext context) {
+    final model = gFFI.serverModel;
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Color(0xFFE6F7FC),
+        border: Border.all(color: Color(0xFF00ADD8), width: 2),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            translate("Your Desktop"),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF00ADD8),
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            "Puedes acceder a tu escritorio con esta ID y contraseña.",
+            style: TextStyle(fontSize: 12, color: Colors.black54),
+          ),
+          SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      translate("ID"),
+                      style: TextStyle(fontSize: 13, color: Colors.black54),
+                    ),
+                    GestureDetector(
+                      onDoubleTap: () {
+                        Clipboard.setData(
+                            ClipboardData(text: model.serverId.text));
+                        showToast(translate("Copied"));
+                      },
+                      child: Text(
+                        model.serverId.text,
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF00ADD8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      translate("Password"),
+                      style: TextStyle(fontSize: 13, color: Colors.black54),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      model.serverPasswd.text,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
