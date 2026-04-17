@@ -89,14 +89,14 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-           VALUE "CompanyName", "Univecs SL" "\0"
-           VALUE "FileDescription", "Univecs Soporte" "\0"
-           VALUE "FileVersion", VERSION_AS_STRING "\0"
-           VALUE "InternalName", "UnivecsSoporte" "\0"
-           VALUE "LegalCopyright", "Copyright (C) 2026 Univecs SL. Todos los derechos reservados." "\0"
-           VALUE "OriginalFilename", "UnivecsSoporte.exe" "\0"
-           VALUE "ProductName", "Univecs Soporte" "\0"
-           VALUE "ProductVersion", VERSION_AS_STRING "\0"
+            VALUE "CompanyName", "Univecs SL" "\0"
+            VALUE "FileDescription", "Univecs Soporte" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "UnivecsSoporte" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 Univecs SL. Todos los derechos reservados." "\0"
+            VALUE "OriginalFilename", "UnivecsSoporte.exe" "\0"
+            VALUE "ProductName", "Univecs Soporte" "\0"
+            VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
     BLOCK "VarFileInfo"
