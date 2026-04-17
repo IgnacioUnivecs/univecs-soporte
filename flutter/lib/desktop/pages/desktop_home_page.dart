@@ -90,8 +90,12 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         alignment: Alignment.center,
         child: loadLogo(),
       ),
-      buildTip(context),
-      // Moved to right pane in buildRightPane: buildIDBoard, buildPasswordBoard
+      // buildTip moved: info now shown in buildLocalIdCard on right pane
+      // buildIDBoard, buildPasswordBoard moved to right pane
+      SizedBox(
+        height: 220,
+        child: ConnectionPage(mode: ConnectionPageMode.connectOnly),
+      ),
       FutureBuilder<Widget>(
         future: Future.value(
             Obx(() => buildHelpCards(stateGlobal.updateUrl.value))),
@@ -130,7 +134,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     return ChangeNotifierProvider.value(
       value: gFFI.serverModel,
       child: Container(
-        width: isIncomingOnly ? 280.0 : 200.0,
+        width: isIncomingOnly ? 280.0 : 340.0,
         color: Theme.of(context).colorScheme.background,
         child: Stack(
           children: [
@@ -187,7 +191,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (!isOutgoingOnly) buildLocalIdCard(context),
-          Expanded(child: ConnectionPage()),
+          Expanded(child: ConnectionPage(mode: ConnectionPageMode.historyOnly)),
         ],
       ),
     );

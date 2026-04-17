@@ -21,6 +21,9 @@ import '../../common/widgets/autocomplete.dart';
 import '../../models/platform_model.dart';
 import '../../desktop/widgets/material_mod_popup_menu.dart' as mod_menu;
 
+
+enum ConnectionPageMode { full, connectOnly, historyOnly }
+
 class OnlineStatusWidget extends StatefulWidget {
   const OnlineStatusWidget({Key? key, this.onSvcStatusChanged})
       : super(key: key);
@@ -189,7 +192,8 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
 
 /// Connection page for connecting to a remote peer.
 class ConnectionPage extends StatefulWidget {
-  const ConnectionPage({Key? key}) : super(key: key);
+  final ConnectionPageMode mode;
+  const ConnectionPage({Key? key, this.mode = ConnectionPageMode.full}) : super(key: key);
 
   @override
   State<ConnectionPage> createState() => _ConnectionPageState();
@@ -304,23 +308,28 @@ class _ConnectionPageState extends State<ConnectionPage>
   @override
   Widget build(BuildContext context) {
     final isOutgoingOnly = bind.isOutgoingOnly();
+    final mode = widget.mode;
     return Column(
       children: [
         Expanded(
             child: Column(
           children: [
-            Row(
-              children: [
-                Flexible(child: _buildRemoteIDTextField(context)),
-              ],
-            ).marginOnly(top: 22),
-            SizedBox(height: 12),
-            Divider().paddingOnly(right: 12),
-            Expanded(child: PeerTabPage()),
+            if (mode != ConnectionPageMode.historyOnly) ...[
+              Row(
+                children: [
+                  Flexible(child: _buildRemoteIDTextField(context)),
+                ],
+              ).marginOnly(top: 22),
+              SizedBox(height: 12),
+            ],
+            if (mode != ConnectionPageMode.connectOnly) ...[
+              Divider().paddingOnly(right: 12),
+              Expanded(child: PeerTabPage()),
+            ],
           ],
         ).paddingOnly(left: 12.0)),
-        if (!isOutgoingOnly) const Divider(height: 1),
-        if (!isOutgoingOnly) OnlineStatusWidget()
+        if (!isOutgoingOnly && mode != ConnectionPageMode.connectOnly) const Divider(height: 1),
+        if (!isOutgoingOnly && mode != ConnectionPageMode.connectOnly) OnlineStatusWidget()
       ],
     );
   }
