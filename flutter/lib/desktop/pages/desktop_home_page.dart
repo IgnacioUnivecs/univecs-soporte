@@ -220,7 +220,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
           ),
           SizedBox(height: 4),
           Text(
-            "Puedes acceder a tu escritorio con esta ID y contraseña.",
+            "Facilita esta ID y contraseña al técnico para que pueda conectarse a tu ordenador.",
             style: TextStyle(fontSize: 12, color: Colors.black54),
           ),
           SizedBox(height: 12),
@@ -248,6 +248,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                           readOnly: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            filled: false,
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
                           ),
@@ -277,6 +281,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                         readOnly: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          filled: false,
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                         ),
