@@ -64,9 +64,9 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!isIncomingOnly) Expanded(child: buildRightPane(context)),
-        if (!isIncomingOnly) const VerticalDivider(width: 1),
         buildLeftPane(context),
+        if (!isIncomingOnly) const VerticalDivider(width: 1),
+        if (!isIncomingOnly) Expanded(child: buildRightPane(context)),
       ],
     ));
   }
@@ -241,9 +241,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                           contentPadding: EdgeInsets.only(top: 10, bottom: 10),
                         ),
                         style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF00ADD8),
+                          fontSize: 22,
                         ),
                       ).workaroundFreezeLinuxMint(),
                     ),
