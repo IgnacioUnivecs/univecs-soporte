@@ -1072,7 +1072,7 @@ fn get_api_server_(api: String, custom: String) -> String {
     if !api.is_empty() {
         return api.to_owned();
     }
-   let s0 = get_custom_rendezvous_server(custom);
+    let s0 = get_custom_rendezvous_server(custom);
     if !s0.is_empty() {
         // If the custom rendezvous matches our embedded one, use our API server
         if config::RENDEZVOUS_SERVERS.iter().any(|&rs| s0.starts_with(rs)) {
