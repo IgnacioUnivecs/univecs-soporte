@@ -1072,8 +1072,12 @@ fn get_api_server_(api: String, custom: String) -> String {
     if !api.is_empty() {
         return api.to_owned();
     }
-    let s0 = get_custom_rendezvous_server(custom);
+   let s0 = get_custom_rendezvous_server(custom);
     if !s0.is_empty() {
+        // If the custom rendezvous matches our embedded one, use our API server
+        if config::RENDEZVOUS_SERVERS.iter().any(|&rs| s0.starts_with(rs)) {
+            return hbb_common::config::RS_API_SERVER.to_owned();
+        }
         let s = crate::increase_port(&s0, -2);
         if s == s0 {
             return format!("http://{}:{}", s, config::RENDEZVOUS_PORT - 2);
@@ -1081,7 +1085,7 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "https://admin.rustdesk.com".to_owned()
+    hbb_common::config::RS_API_SERVER.to_owned()
 }
 
 #[inline]
