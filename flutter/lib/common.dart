@@ -261,6 +261,7 @@ class MyTheme {
   static const Color cmIdColor = Color(0xFF21790B);
   static const Color dark = Colors.black87;
   static const Color button = Color(0xFF00ADD8);
+  static const Color hoverBorder = Color(0xFF999999);
 
   // ListTile
   static const ListTileThemeData listTileTheme = ListTileThemeData(
